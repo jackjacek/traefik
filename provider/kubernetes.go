@@ -2,7 +2,7 @@ package provider
 
 import (
 	"fmt"
-	log "github.com/Sirupsen/logrus"
+	"github.com/containous/traefik/log"
 	"github.com/cenkalti/backoff"
 	"github.com/containous/traefik/provider/k8s"
 	"github.com/containous/traefik/safe"
