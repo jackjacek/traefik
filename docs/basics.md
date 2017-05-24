@@ -208,7 +208,7 @@ The following rules are both `Matchers` and `Modifiers`, so the `Matcher` portio
 3. `PathStripRegex`
 4. `PathPrefixStripRegex`
 5. `AddPrefix`
-6. `ReplacePath` 
+6. `ReplacePath`
 
 ### Priorities
 
@@ -234,6 +234,24 @@ You can customize priority by frontend:
 ```
 
 Here, `frontend1` will be matched before `frontend2` (`10 > 5`).
+
+###Custom headers
+
+Custom headers can be configured through the frontends, to add headers to either requests or responses that match the frontend's rules. This allows for setting headers such as `X-Script-Name` to be added to the request, or custom headers to be added to the response:
+
+```
+[frontends]
+  [frontends.frontend1]
+  backend = "backend1"
+    [frontends.frontend1.headers.customresponseheaders]
+    X-Custom-Response-Header = "True"
+    [frontends.frontend1.headers.customrequestheaders]
+    X-Script-Name = "test"
+    [frontends.frontend1.routes.test_1]
+    rule = "PathPrefixStrip:/test"
+```
+
+In this example, all matches to the path `/test` will have the `X-Script-Name` header added to the proxied request, and the `X-Custom-Response-Header` added to the response.
 
 ## Backends
 

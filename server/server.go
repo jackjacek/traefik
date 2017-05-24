@@ -779,6 +779,9 @@ func (server *Server) loadConfig(configurations configs, globalConfiguration Glo
 						}
 						negroni.Use(cbreaker)
 					} else {
+						headerMiddleware := middlewares.NewHeader(middlewares.HeaderOptions{CustomRequestHeaders: frontend.Headers.CustomRequestHeaders, CustomResponseHeaders: frontend.Headers.CustomResponseHeaders})
+						negroni.Use(headerMiddleware)
+						log.Debugf("adding header middleware for frontend %s", frontendName)
 						negroni.UseHandler(lb)
 					}
 					backends[entryPointName+frontend.Backend] = negroni
