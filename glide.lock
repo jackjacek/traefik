@@ -1,5 +1,5 @@
-hash: e59e8244152a823cd3633fb09cdd583c4e5be78d7b50fb7047ba6b6a9ed5e8ec
-updated: 2017-05-19T23:30:19.890844996+02:00
+hash: e306d63f6977bf9894c9f0f74e9ae1fc18b7d5d554ffb504c49f0ac076810138
+updated: 2017-06-06T23:01:03.435813034-06:00
 imports:
 - name: cloud.google.com/go
   version: 2e6a95edb1071d750f6d7db777bf66cd2997af6c
@@ -406,6 +406,8 @@ imports:
   - codec
 - name: github.com/unrolled/render
   version: 50716a0a853771bb36bfce61a45cdefdb98c2e6e
+- name: github.com/unrolled/secure
+  version: 179957f53e4db0bcd04dd42c95b07b1d12c34f5e
 - name: github.com/vdemeester/docker-events
   version: be74d4929ec1ad118df54349fda4b0cba60f849b
 - name: github.com/vulcand/oxy

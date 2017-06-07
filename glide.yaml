@@ -150,3 +150,5 @@ import:
   version: 9af46dd5a1713e8b5cd71106287eba3cefdde50b
 - package: google.golang.org/grpc
   version: v1.2.0
+- package: github.com/unrolled/secure
+  version: 179957f53e4db0bcd04dd42c95b07b1d12c34f5e
