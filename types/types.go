@@ -58,6 +58,12 @@ type Route struct {
 type Headers struct {
 	CustomRequestHeaders  map[string]string `json:"customrequestheaders,omitempty"`
 	CustomResponseHeaders map[string]string `json:"customresponseheaders,omitempty"`
+	SSLRedirect bool
+	FrameDeny bool
+	STSPreload bool
+	STSSeconds int64
+	STSIncludeSubdomains bool
+
 }
 
 // Frontend holds frontend configuration.

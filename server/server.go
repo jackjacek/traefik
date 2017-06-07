@@ -29,6 +29,7 @@ import (
 	"github.com/containous/traefik/safe"
 	"github.com/containous/traefik/types"
 	"github.com/streamrail/concurrent-map"
+	"github.com/unrolled/secure"
 	"github.com/vulcand/oxy/cbreaker"
 	"github.com/vulcand/oxy/connlimit"
 	"github.com/vulcand/oxy/forward"
@@ -781,6 +782,14 @@ func (server *Server) loadConfig(configurations configs, globalConfiguration Glo
 					} else {
 						headerMiddleware := middlewares.NewHeader(middlewares.HeaderOptions{CustomRequestHeaders: frontend.Headers.CustomRequestHeaders, CustomResponseHeaders: frontend.Headers.CustomResponseHeaders})
 						negroni.Use(headerMiddleware)
+						secureMiddleware := secure.New(secure.Options{
+							SSLRedirect: frontend.Headers.SSLRedirect,
+							STSSeconds: frontend.Headers.STSSeconds,
+							STSIncludeSubdomains: frontend.Headers.STSIncludeSubdomains,
+							STSPreload: frontend.Headers.STSPreload,
+							FrameDeny: frontend.Headers.FrameDeny,
+						})
+						negroni.UseFunc(secureMiddleware.HandlerFuncWithNext)
 						log.Debugf("adding header middleware for frontend %s", frontendName)
 						negroni.UseHandler(lb)
 					}
