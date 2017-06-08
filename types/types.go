@@ -59,7 +59,7 @@ type Headers struct {
 	CustomRequestHeaders    map[string]string `json:"customRequestHeaders,omitempty"`
 	CustomResponseHeaders   map[string]string `json:"customResponseHeaders,omitempty"`
 	AllowedHosts            []string          `json:"allowedHosts,omitempty"`
-	HostsProxyHeaders       []string          `json:"allowedHosts,omitempty"`
+	HostsProxyHeaders       []string          `json:"hostsProxyHeaders,omitempty"`
 	SSLRedirect             bool              `json:"sslRedirect,omitempty"`
 	SSLTemporaryRedirect    bool              `json:"sslTemporaryRedirect,omitempty"`
 	SSLHost                 string            `json:"sslHost,omitempty"`
