@@ -796,7 +796,7 @@ func (server *Server) loadConfig(configurations configs, globalConfiguration Glo
 							FrameDeny:               frontend.Headers.FrameDeny,
 							CustomFrameOptionsValue: frontend.Headers.CustomFrameOptionsValue,
 							ContentTypeNosniff:      frontend.Headers.ContentTypeNosniff,
-							BrowserXssFilter:        frontend.Headers.BrowserXssFilter,
+							BrowserXssFilter:        frontend.Headers.BrowserXSSFilter,
 							ContentSecurityPolicy:   frontend.Headers.ContentSecurityPolicy,
 							PublicKey:               frontend.Headers.PublicKey,
 							ReferrerPolicy:          frontend.Headers.ReferrerPolicy,

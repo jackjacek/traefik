@@ -71,7 +71,7 @@ type Headers struct {
 	FrameDeny               bool              `json:"frameDeny,omitempty"`
 	CustomFrameOptionsValue string            `json:"customFrameOptionsValue,omitempty"`
 	ContentTypeNosniff      bool              `json:"contentTypeNosniff,omitempty"`
-	BrowserXssFilter        bool              `json:"browserXssFilter,omitempty"`
+	BrowserXSSFilter        bool              `json:"browserXssFilter,omitempty"`
 	ContentSecurityPolicy   string            `json:"contentSecurityPolicy,omitempty"`
 	PublicKey               string            `json:"publicKey,omitempty"`
 	ReferrerPolicy          string            `json:"referrerPolicy,omitempty"`
