@@ -31,7 +31,7 @@ func NewHeader(options ...HeaderOptions) *HeaderStruct {
 	}
 
 	return &HeaderStruct{
-		opt:            o,
+		opt: o,
 	}
 }
 

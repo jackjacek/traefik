@@ -56,14 +56,26 @@ type Route struct {
 
 // Headers holds the custom header configuration
 type Headers struct {
-	CustomRequestHeaders  map[string]string `json:"customrequestheaders,omitempty"`
-	CustomResponseHeaders map[string]string `json:"customresponseheaders,omitempty"`
-	SSLRedirect bool
-	FrameDeny bool
-	STSPreload bool
-	STSSeconds int64
-	STSIncludeSubdomains bool
-
+	CustomRequestHeaders    map[string]string `json:"customRequestHeaders,omitempty"`
+	CustomResponseHeaders   map[string]string `json:"customResponseHeaders,omitempty"`
+	AllowedHosts            []string          `json:"allowedHosts,omitempty"`
+	HostsProxyHeaders       []string          `json:"allowedHosts,omitempty"`
+	SSLRedirect             bool              `json:"sslRedirect,omitempty"`
+	SSLTemporaryRedirect    bool              `json:"sslTemporaryRedirect,omitempty"`
+	SSLHost                 string            `json:"sslHost,omitempty"`
+	SSLProxyHeaders         map[string]string `json:"sslProxyHeaders,omitempty"`
+	STSSeconds              int64             `json:"stsSeconds,omitempty"`
+	STSIncludeSubdomains    bool              `json:"stsIncludeSubdomains,omitempty"`
+	STSPreload              bool              `json:"stsPreload,omitempty"`
+	ForceSTSHeader          bool              `json:"forceSTSHeader,omitempty"`
+	FrameDeny               bool              `json:"frameDeny,omitempty"`
+	CustomFrameOptionsValue string            `json:"customFrameOptionsValue,omitempty"`
+	ContentTypeNosniff      bool              `json:"contentTypeNosniff,omitempty"`
+	BrowserXssFilter        bool              `json:"browserXssFilter,omitempty"`
+	ContentSecurityPolicy   string            `json:"contentSecurityPolicy,omitempty"`
+	PublicKey               string            `json:"publicKey,omitempty"`
+	ReferrerPolicy          string            `json:"referrerPolicy,omitempty"`
+	IsDevelopment           bool              `json:"isDevelopment,omitempty"`
 }
 
 // Frontend holds frontend configuration.

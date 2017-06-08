@@ -783,11 +783,24 @@ func (server *Server) loadConfig(configurations configs, globalConfiguration Glo
 						headerMiddleware := middlewares.NewHeader(middlewares.HeaderOptions{CustomRequestHeaders: frontend.Headers.CustomRequestHeaders, CustomResponseHeaders: frontend.Headers.CustomResponseHeaders})
 						negroni.Use(headerMiddleware)
 						secureMiddleware := secure.New(secure.Options{
-							SSLRedirect: frontend.Headers.SSLRedirect,
-							STSSeconds: frontend.Headers.STSSeconds,
-							STSIncludeSubdomains: frontend.Headers.STSIncludeSubdomains,
-							STSPreload: frontend.Headers.STSPreload,
-							FrameDeny: frontend.Headers.FrameDeny,
+							AllowedHosts:            frontend.Headers.AllowedHosts,
+							HostsProxyHeaders:       frontend.Headers.HostsProxyHeaders,
+							SSLRedirect:             frontend.Headers.SSLRedirect,
+							SSLTemporaryRedirect:    frontend.Headers.SSLTemporaryRedirect,
+							SSLHost:                 frontend.Headers.SSLHost,
+							SSLProxyHeaders:         frontend.Headers.SSLProxyHeaders,
+							STSSeconds:              frontend.Headers.STSSeconds,
+							STSIncludeSubdomains:    frontend.Headers.STSIncludeSubdomains,
+							STSPreload:              frontend.Headers.STSPreload,
+							ForceSTSHeader:          frontend.Headers.ForceSTSHeader,
+							FrameDeny:               frontend.Headers.FrameDeny,
+							CustomFrameOptionsValue: frontend.Headers.CustomFrameOptionsValue,
+							ContentTypeNosniff:      frontend.Headers.ContentTypeNosniff,
+							BrowserXssFilter:        frontend.Headers.BrowserXssFilter,
+							ContentSecurityPolicy:   frontend.Headers.ContentSecurityPolicy,
+							PublicKey:               frontend.Headers.PublicKey,
+							ReferrerPolicy:          frontend.Headers.ReferrerPolicy,
+							IsDevelopment:           frontend.Headers.IsDevelopment,
 						})
 						negroni.UseFunc(secureMiddleware.HandlerFuncWithNext)
 						log.Debugf("adding header middleware for frontend %s", frontendName)
