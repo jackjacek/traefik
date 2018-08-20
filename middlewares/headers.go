@@ -14,6 +14,13 @@ type HeaderOptions struct {
 	CustomRequestHeaders map[string]string
 	// If Custom response headers are set, these will be added to the ResponseWriter
 	CustomResponseHeaders map[string]string
+
+	AccessControlAllowCredentials bool
+	AccessControlAllowHeaders     []string
+	AccessControlAllowMethods     []string
+	AccessControlAllowOrigin      []string
+	AccessControlExposeHeaders    []string
+	AccessControlMaxAge           int64
 }
 
 // HeaderStruct is a middleware that helps setup a few basic security features. A single headerOptions struct can be
@@ -25,14 +32,20 @@ type HeaderStruct struct {
 
 // NewHeaderFromStruct constructs a new header instance from supplied frontend header struct.
 func NewHeaderFromStruct(headers *types.Headers) *HeaderStruct {
-	if headers == nil || !headers.HasCustomHeadersDefined() {
+	if headers == nil || (!headers.HasCustomHeadersDefined() && !headers.HasCorsHeadersDefined()) {
 		return nil
 	}
 
 	return &HeaderStruct{
 		opt: HeaderOptions{
-			CustomRequestHeaders:  headers.CustomRequestHeaders,
-			CustomResponseHeaders: headers.CustomResponseHeaders,
+			CustomRequestHeaders:          headers.CustomRequestHeaders,
+			CustomResponseHeaders:         headers.CustomResponseHeaders,
+			AccessControlAllowCredentials: headers.AccessControlAllowCredentials,
+			AccessControlAllowHeaders:     headers.AccessControlAllowHeaders,
+			AccessControlAllowMethods:     headers.AccessControlAllowMethods,
+			AccessControlAllowOrigin:      headers.AccessControlAllowOrigin,
+			AccessControlExposeHeaders:    headers.AccessControlExposeHeaders,
+			AccessControlMaxAge:           headers.AccessControlMaxAge,
 		},
 	}
 }
