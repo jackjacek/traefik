@@ -158,6 +158,7 @@ func (h *Headers) HasCustomHeadersDefined() bool {
 		len(h.CustomRequestHeaders) != 0)
 }
 
+// HasCorsHeadersDefined checks to see if any of the cors header elements have been set
 func (h *Headers) HasCorsHeadersDefined() bool {
 	return h != nil && (h.AccessControlAllowCredentials ||
 		len(h.AccessControlAllowHeaders) != 0 ||
