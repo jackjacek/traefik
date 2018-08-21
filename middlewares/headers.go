@@ -155,6 +155,8 @@ func (s *HeaderStruct) getAllowOrigin() (string, error) {
 		return s.originHeader, nil
 	case "*":
 		return "*", nil
+	case "":
+		return "", nil
 	}
 	return "", fmt.Errorf("invalid Access-Control-Allow-Origin setting: %s", s.opt.AccessControlAllowOrigin)
 }
