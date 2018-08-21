@@ -126,7 +126,7 @@ type Headers struct {
 	AccessControlAllowCredentials bool     `json:"AccessControlAllowCredentials,omitempty"`
 	AccessControlAllowHeaders     []string `json:"AccessControlAllowHeaders,omitempty"`
 	AccessControlAllowMethods     []string `json:"AccessControlAllowMethods,omitempty"`
-	AccessControlAllowOrigin      []string `json:"AccessControlAllowOrigin,omitempty"`
+	AccessControlAllowOrigin      string   `json:"AccessControlAllowOrigin,omitempty"`
 	AccessControlExposeHeaders    []string `json:"AccessControlExposeHeaders,omitempty"`
 	AccessControlMaxAge           int64    `json:"AccessControlMaxAge,omitempty"`
 
@@ -162,7 +162,7 @@ func (h *Headers) HasCorsHeadersDefined() bool {
 	return h != nil && (h.AccessControlAllowCredentials ||
 		len(h.AccessControlAllowHeaders) != 0 ||
 		len(h.AccessControlAllowMethods) != 0 ||
-		len(h.AccessControlAllowOrigin) != 0 ||
+		h.AccessControlAllowOrigin != "" ||
 		len(h.AccessControlExposeHeaders) != 0 ||
 		h.AccessControlMaxAge != 0)
 }

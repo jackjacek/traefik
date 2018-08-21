@@ -18,16 +18,18 @@ type HeaderOptions struct {
 	AccessControlAllowCredentials bool
 	AccessControlAllowHeaders     []string
 	AccessControlAllowMethods     []string
-	AccessControlAllowOrigin      []string
-	AccessControlExposeHeaders    []string
-	AccessControlMaxAge           int64
+	// AccessControlAllowOrigin Can be "origin-list-or-null", "*", or a comma separated list or origins, or "null". From (https://www.w3.org/TR/cors/#access-control-allow-origin-response-header)
+	AccessControlAllowOrigin   string
+	AccessControlExposeHeaders []string
+	AccessControlMaxAge        int64
 }
 
 // HeaderStruct is a middleware that helps setup a few basic security features. A single headerOptions struct can be
 // provided to configure which features should be enabled, and the ability to override a few of the default values.
 type HeaderStruct struct {
 	// Customize headers with a headerOptions struct.
-	opt HeaderOptions
+	opt          HeaderOptions
+	originHeader string
 }
 
 // NewHeaderFromStruct constructs a new header instance from supplied frontend header struct.
@@ -51,6 +53,11 @@ func NewHeaderFromStruct(headers *types.Headers) *HeaderStruct {
 }
 
 func (s *HeaderStruct) ServeHTTP(w http.ResponseWriter, r *http.Request, next http.HandlerFunc) {
+	originHeader := r.Header.Get("Origin")
+	if originHeader != "" {
+		s.originHeader = originHeader
+	}
+
 	s.ModifyRequestHeaders(r)
 	// If there is a next, call it.
 	if next != nil {
@@ -78,6 +85,15 @@ func (s *HeaderStruct) ModifyResponseHeaders(res *http.Response) error {
 			res.Header.Del(header)
 		} else {
 			res.Header.Set(header, value)
+		}
+	}
+
+	switch s.opt.AccessControlAllowOrigin {
+	case "origin-list-or-null":
+		if s.originHeader == "" {
+			res.Header.Set("Access-Control-Allow-Origin", "null")
+		} else {
+			res.Header.Set("Access-Control-Allow-Origin", s.originHeader)
 		}
 	}
 	return nil
